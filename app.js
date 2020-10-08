@@ -100,6 +100,26 @@ app.post(routes.start, function(req, res) {
 	res.end();
 });
 
+// set stop to all jobs
+app.post(routes.stop_all, function(req, res) {
+	crontab.crontabs(function (docs) {
+		docs.forEach(function(doc) {
+			crontab.status(doc._id, true);
+		});
+	});
+	res.end();
+});
+
+// set start to all jobs
+app.post(routes.start_all, function(req, res) {
+	crontab.crontabs(function (docs) {
+		docs.forEach(function(doc) {
+			crontab.status(doc._id, false);
+		});
+	});
+	res.end();
+});
+
 // remove a job
 app.post(routes.remove, function(req, res) {
 	crontab.remove(req.body._id);

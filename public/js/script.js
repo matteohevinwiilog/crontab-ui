@@ -47,6 +47,22 @@ function stopJob(_id){
 	});
 }
 
+function stopAllJobs(){
+	messageBox("<p> Do you want to stop all jobs? </p>", "Confirm stop all jobs", null, null, function(){
+		$.post(routes.stop_all, {}, function(){
+			location.reload();
+		});
+	});
+}
+
+function startAllJobs(){
+	messageBox("<p> Do you want to stop all jobs? </p>", "Confirm stop all jobs", null, null, function(){
+		$.post(routes.start_all, {}, function(){
+			location.reload();
+		});
+	});
+}
+
 function startJob(_id){
 	messageBox("<p> Do you want to start this Job? </p>", "Confirm start job", null, null, function(){
 		$.post(routes.start, {_id: _id}, function(){
@@ -60,7 +76,7 @@ function runJob(_id){
 		$.post(routes.run, {_id: _id}, function(){
 			location.reload();
 		});
-		
+
 	});
 }
 
