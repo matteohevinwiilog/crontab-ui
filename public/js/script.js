@@ -102,7 +102,7 @@ function getCrontab(){
 	});
 }
 
-function editJob(_id){
+function editJob(_id, isDuplication = false){
 	var job = null;
 	crontabs.forEach(function(crontab){
 		if(crontab._id == _id)
@@ -140,7 +140,7 @@ function editJob(_id){
 		let name = $("#job-name").val();
 		let mailing = JSON.parse($("#job-mailing").attr("data-json"));
 		let logging = $("#job-logging").prop("checked");
-		$.post(routes.save, {name: name, command: job_command , schedule: schedule, _id: _id, logging: logging, mailing: mailing}, function(){
+		$.post(routes.save, {name: name, command: job_command , schedule: schedule, _id: (isDuplication ? -1 : _id), logging: logging, mailing: mailing}, function(){
 			location.reload();
 		});
 	});
